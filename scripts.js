@@ -32,35 +32,58 @@ const militaryHelicopter = [
 
 class Gallery {
     constructor(civilImages, militaryImages) {
+        this.civilImages = civilImages;
+        this.militaryImages = militaryImages;
     }
-    
+
     getRandomCivil() {
+        const randomIndex = Math.floor(Math.random() * this.civilImages.length);
+        return this.civilImages[randomIndex];
     }
-    
+
     getRandomMilitary() {
+        const randomIndex = Math.floor(Math.random() * this.militaryImages.length);
+        return this.militaryImages[randomIndex];
     }
-    
+
     getAll() {
+        return [this.civilImages, this.militaryImages];
     }
 }
 
 class Painter {
     constructor() {
+        this.createGallery();
     }
 
     createGallery() {
+        const gallery = document.createElement('div');
+        gallery.classList.add('gallery');
+        document.body.appendChild(gallery);
+        this.gallery = gallery;
     }
 
     createImageTag(imageUrl) {
+        const image = document.createElement('img');
+        image.src = imageUrl;
+        return image;
     }
 
     paintSingleImage(imageUrl) {
+        const img = this.createImageTag(imageUrl);
+        this.gallery.appendChild(img);
     }
 
     paintMultipleImages(arrayOfImages) {
+        arrayOfImages.forEach((imageUrl) => {
+            const img = this.createImageTag(imageUrl);
+            this.gallery.appendChild(img);
+        });
     }
 }
 
 const aircrafts = new Gallery(civilAircrafts, militaryAircrafts);
 const helicopters = new Gallery(civilHelicopters, militaryHelicopter);
 const painter = new Painter();
+
+
