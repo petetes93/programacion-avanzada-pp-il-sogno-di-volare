@@ -47,7 +47,8 @@ class Gallery {
     }
 
     getAll() {
-        return [this.civilImages, this.militaryImages];
+        
+        return this.civilImages.concat(this.militaryImages)
     }
 }
 
